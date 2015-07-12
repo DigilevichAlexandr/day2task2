@@ -1,0 +1,49 @@
+using System;
+using System.Globalization;
+
+public class HexFormatter : IFormatProvider, ICustomFormatter
+{
+    public object GetFormat(Type formatType)
+    {
+        if (formatType == typeof(ICustomFormatter))
+            return this;
+        else
+            return null;
+    }
+
+    public string Format(string format,object arg, IFormatProvider formatProvider)
+    {             
+        if (!this.Equals(formatProvider))
+            return null; 
+
+        string numericString = arg.ToString();
+        long buffer = 0;
+        int i = 0;
+        if (numericString[0] == '-')
+        {
+            i = 1;
+        }
+        for (; i < numericString.Length;i++)
+        {
+            buffer *= 10;
+            buffer += (int)numericString[i] - 48;            
+        }
+
+        string res = "";
+        long digit=' ';
+        while (buffer > 0)
+        {           
+            digit =buffer % 16;
+            buffer /= 16;
+            if (digit < 10)
+                res = (char)(digit + 48) + res;
+            else
+                res = (char)(digit + 55) + res;
+        }
+        //res=(char)(buffer + 48)+res;
+        if (numericString[0] == '-')
+            return '-' + res;
+        else
+            return res; 
+    }
+}
