@@ -1,0 +1,26 @@
+using System;
+using System.IO;
+
+namespace ASP.NET.Digilevich.Day2.Task2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(String.Format(new HexFormatter(),
+                "{0}", 9223372036854775807));
+            Console.WriteLine(String.Format(new HexFormatter(),
+                "{0}", 8569));
+            Console.WriteLine(String.Format(new HexFormatter(),
+                "{0}", -9223372036854775807));
+            Console.WriteLine(String.Format(new HexFormatter(),
+                "{0}", -8569));
+            File.Create("new_file.txt");
+            File.AppendAllText("new_file.txt", String.Format(
+                new HexFormatter(),"{0}", -8569));
+            File.AppendAllText("new_file.txt", String.Format(
+                new HexFormatter(), "{0}", -9223372036854775807));
+            Console.Read();
+        }
+    }
+}
