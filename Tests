@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+namespace Tests
+{
+    [TestClass()]
+    public class HexFormatterTests
+    {
+        [TestMethod()]
+        public void FormatTest()
+        {
+            Assert.AreEqual("2179", String.Format(new HexFormatter(), "{0}", String.Format(new HexFormatter(), "{0}", (long)8569)));
+        }
+    }
+}
